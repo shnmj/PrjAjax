@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		
+		console.log(document.querySelector('#div1') )
+		console.dir(document.querySelector('#div1') )
+		console.dir($('div') );
+		
+		$('div').on('click', function(e) {
+			// console.dir(this); // jquery css() 함수 x
+			console.dir($(this)); // jquery css() 함수 o
+			
+			// console.dir(e.target.innerHTML); // 클릭한 div의 innerHTML
+			console.dir($(this).html() );
+			console.dir(this.innerHTML); // this == e.target → 클릭한 div
+			$(this).css('color', 'skyblue');
+			// this.style.color = 'skyblue';
+			// this.css('color', 'red');  // error : this.css is not a function → 
+			// e.target.style.color = 'skyblue';
+			
+		})
+	})
+</script>
+</head>
+<body>
+	<div id="div1">div1</div>
+	<div id="div2">div2</div>
+	<div id="div3">div3</div>
+	<div id="div4">div4</div>
+</body>
+</html>

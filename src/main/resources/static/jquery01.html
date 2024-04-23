@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+	/*
+	h1 {color : blue;}
+	p  {color : red;}
+	*/
+</style>
+
+<script>
+  /* broswer tag rendering 후 실행  → load  event가 발생하면.
+	window.onload = function() {     // js를 상단에서 적용할 때 window.onload
+		const h1Els = document.getElementsByTagName('h1');
+		// elements = return값이 배열. 하나의 이름으로 El들(태그)을 찾음 (Array = Collection)
+		h1Els[0].style.color = 'blue';
+		h1Els[1].style.color = 'blue';
+		const pEls = document.getElementsByTagName('p');
+			for(let i = 0; i < pEls.length; i++) {	
+			pEls[i].style.color = 'red';
+		}
+	} 
+	*/
+</script>
+
+<!-- jquery cdn -->
+<script src="https://code.jquery.com/jquery.min.js"></script>
+
+<script>
+  // $(function() {}) == window.onload = function() {}
+  
+	// jquery  : js lib 필요
+	// docu의 ready안에 func를 넣음 → window.onload 역할을 하지만 한 번만 가능
+	// $('h1 > p') : document.querySelector(), 
+	//               document.querySelectorAll('h1 > p') 
+	
+	$(document).ready(function () {   
+			$('h1').css('color', 'blue'); // h1 tag를 찾아라 → document.getEl...('h1');
+			$('p').css('color', 'red');
+	}); 
+	$(function () {   // window.onload 와 달리 여러번 사용 가능
+			$('#div1').html('<p>div1 입니다</p>') // innerHTML : <b>text<b> 굵게 표시
+			$('#div2').text('<p>div2 입니다</p>') // innerTEXT : <b>text<b> &lt;&gt;
+			$('div > p').css('text-decoration', 'underline');
+			
+			$('input').val()         // == <input type="" value="">
+			$('input').attr("type")  // == <input type="" value=""> type값을 꺼낼 수 있.
+			$('input').prop("type") 
+			
+			
+			// Event 연결
+			// js에서 => arrow function : 람다식 표현
+			$('div').on('click', function(e) {  // 한 번만 눌러질땐 .one
+					// e = 발생한 event / e.target = event를 발생시킨 Element
+					// e.target : event 발생시킨 Element
+					console.log(e.target)
+					
+					// 선택한(클릭한) div tag만 글자색 변경
+					$('div').css('background-color', 'green');
+					alert("div1");
+					$(this).off('click'); // 재클릭 x
+			})
+	});
+</script> 
+
+
+<body>
+	<h1>Hello</h1>
+  <p>Lorem Ipsum</p>
+  <h1>Title</h1>
+  <p>Lorem Ipsum</p>
+  <p>Lorem Ipsum</p>
+ 
+  <div id="div1"></div> 
+  <div id="div2"></div> 
+  
+  
+</body>
+</html>

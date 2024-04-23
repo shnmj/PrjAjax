@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<ul>
+			<li><a href="/mvc">MVC 방식</a></li>
+			<li><a href="/ajax1">Ajax01(view)</a></li>
+			<li><a href="/ajax2">Ajax02(data)</a></li>
+			<li>&nbsp;</li>
+			<li>
+				<input type="text"    id="indata"/>
+				<input type="button"  id="btnGetData" value="중복확인(XHR)"/>
+			</li>
+			<li>
+				<input type="text"    id="indata2"/>
+				<input type="button"  id="btnGetData2" value="중복확인(fetch)"/>
+			</li>
+			<li>
+				<input type="text"    id="indata3"/>
+				<input type="button"  id="btnGetData3" value="중복확인(fetch)"/>
+			</li>
+		</ul>
+		<div id="output"></div>
+		<ul>
+			<li><a href="jquery01.html">jquery01</a></li>
+			<li><a href="jquery02.html">jquery02</a></li>
+			<li><a href="jquery03.html">jquery03</a></li>
+			<li><a href="jquery04.html">jquery04</a></li>
+			<li><a href="jquery05.html">jquery05</a></li>
+			<li><a href="jquery06.html">jquery06</a></li>
+			<li><a href="jquery07.html">jquery07</a></li>
+			<li><a href="jquery08.html">jquery08</a></li>
+			<li><a href="jquery09.html">jquery09</a></li>
+			<li><a href="jquery10.html">jquery10</a></li>
+		</ul>
+	</div>
+	
+	<script>
+		const outputEl = document.getElementById('output');
+		// a tag 사용 하지 않고 버튼 클릭 시 서버 data를 가져옴
+		const btnGetDataEl = document.querySelector("#btnGetData")  // querySelector는 # 붙임
+		btnGetDataEl.addEventListener('click', function() {
+			// alert('click');
+			// old ver : XMLHttpRequest
+			// response.ResponseText     → 사용할 때 response.text()
+			// response.ResponseHTML     → response.html()
+			// response.ResponseXML      → response.xml()
+			// JSON : JSON.stringify(js 객체) → string으로 변경시켜줌
+			// JSON : JSON.parse("")     → JS 객체로 변경시켜줌
+			const xhttp  = new XMLHttpRequest();  // 1번 실행 : xhr new
+			xhttp.onload = function() { 
+				// 비동기호출(asynchronous js를 써서 and xml 호출 : ajax) 
+				// → 4번 실행 : 결과 도착 시 수행하는 이벤트 / rest api 와는 별개. 
+				console.dir(xhttp)
+				alert(xhttp.responseText); // SHIN Data
+				
+				outputEl.innerHTML = xhttp.responseText;
+			}
+			xhttp.open("GET", "/ajax3");   // 2번 실행 : 호출 준비 
+			xhttp.send();  // 3번 실행 : 호출
+		} );   // addEventListener () 함수 = 마침괄호 필요
+		
+			// new ver ----------------------------------------------------------------------
+		const btnGetData2El   = document.querySelector('#btnGetData2');
+		btnGetData2El.onclick = (e) => {
+				// alert('data2 click');
+				let result ='';
+				fetch('/ajax3')
+					.then((response) => response.text() ) // 서버에서 데이터를 받아온 후 (response.ResponseText)
+					.then((data)     => {
+								result = data;})
+				outputEl.innerHTML = result;
+		};
+		// -----------------------------------------------------------------------------------
+		const btnGetData3El   = document.querySelector('#btnGetData3');
+		btnGetData3El.onclick = () => { 
+				fetch('/ajax4') // ajax4 함수 실행 후 then으로 결과를 돌려받음
+					.then((response) => response.json() ) // respon에 담겨서 response안의 text만 뽑아냄 / application/json
+					.then((json) => {                     // 그리고 화면에 출력 
+							let html = `<div>
+								  					<ul>
+												    	<li>아이디 :${jsonObj.userid}</li>
+												    	<li>암호   :${jsonObj.userpass}</li>
+												    	<li>이름   :${jsonObj.username}</li>
+													  </ul>
+													</div>`                   
+							outputEl.innerHTML = html; // [obj Obj]
+					}
+				);
+		}
+		
+	</script>
+	
+	
+</body>
+</html>
