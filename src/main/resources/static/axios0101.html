@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<style>
+	ul {
+			list-style:none;
+			border : 1px solid skyblue;
+			margin : 20px; padding : 10px;
+			float  : left;
+			border-radius: 10px;
+	}
+	li img {width:70px; height:70px}
+</style>
+</head>
+<body>
+	<button>OK</button>
+	<div id="output"></div>
+	
+	<script>
+		const btnOkEl = document.querySelector('button') // $(button)
+		btnOkEl.addEventListener('click', function(e) {
+			console.dir(axios);
+			let url ='https://jsonplaceholder.typicode.com/photos/1'
+			axios.get(url)
+				.then(function(response) {
+					console.log(response)  
+					console.log(response.data) 
+					// 서버가 보내주는 data {객체} / 데이터 안의 데이터 = 객체들의 배열
+					// 데이터(json)를 받아와서 js 로 잘라서 사용
+					
+					/*  response.data
+					   {  
+								page     : 2,      
+						    per_page : 6,   // -> 페이지 당 6개를 뿌림
+						    total    : 12,
+						    data  : [   // responser.data.data
+						    			{"id":7,  "email" : "", ... },
+						    			{"id":8,  "email" : "", ... },
+						    			{"id":9,  "email" : "", ... },
+						    			{"id":10, "email" : "", ... }
+						            ]
+					   }
+					
+					*/
+					
+					// axios = server 결과({ })에 항목(객체) 추가
+					// 실제 도착 data는 response.data 안에 존재
+					let total      = response.data.total;
+					let page       = response.data.page;
+					let dataList   = response.data;  // 배열
+					const outputEl = document.querySelector('#output');
+					let html  = '총 페이지 수 : '  + total + "<br>"
+					html     += "현재 페이지  : "  + page  + "<hr>"
+					
+					html     += jsontohtml(dataList);
+					
+				  outputEl.innerHTML = html;
+				})
+				.catch(function(error) {
+					console.log(error)
+				})
+				.finally(function() {
+					console.log("항상 실행")
+				})
+		});
+		
+		function jsontohtml(dataList) {
+			/*
+			 1. for(let i=0; i<dataList.length; i++) {
+							let data = dataList[i] 
+							data.id			
+			 		}
+			
+			 2. for(let i in dataList) {
+			 				let data = dataList[i] 
+							data.id 
+					}
+							
+			 3. for(let data of dataList) { 
+							data.id 
+					}
+			 
+			 4. dataList.forEach(function(data, i) {    → 최신
+				 			data.id
+			 });
+			*/ 
+			
+			
+			let tag = ''; // 객체를 html로 바꿔서 출력
+		  dataList.forEach((data, i) => {    // 람다식 == arrow function / i번째의 값은 ~
+				tag += `<ul>
+				          <li>albumId:${data.albumId}</li>
+				          <li>id:${data.id}</li>
+				          <li>title:${data.title}</li>
+				          <li>url:${data.url}</li>
+				          <li>thumbnailUrl:${data.thumbnailUrl}</li>
+				        </ul>`
+			}); 
+			return tag;
+		}
+		
+	</script>
+</body>
+</html>

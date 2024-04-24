@@ -20,15 +20,15 @@
 	$(function() {
 		console.dir(student);
 		$('button').on('click', function() {
-			let obj  = JSON.stringify(student)  // js obj → String {"num":28 ~~}
-			let obj2 = {"num":99,"name":"SHIN","age":28}
+			let obj  =  JSON.stringify(student)  // js obj → String {"num":28 ~~}
+			let obj2 =  {"num":99,"name":"SHIN","age":28}
 			let obj3 = '{"num":9,"name":"SHIN2","age":30}'; // string
-			let obj4 = JSON.parse(obj3);                   // string → obj
+			let obj4 = JSON.parse(obj3);                    // string → obj
 			$('#output').append(obj           +  '<br>');
-			$('#output').append(obj.num       +  '<br>');  // undefined (변수에 초기값 없을때) 
+			$('#output').append(obj.num       +  '<br>');   // undefined (변수에 초기값 없을때) 
 			$('#output').append(obj2.num      +  '<br>');
-			$('#output').append(typeof (obj)  +  '<br>');  // string {"num":28 ~~}
-			$('#output').append(typeof (obj2) +  '<br>');  // obj    {"num":28 ~~}
+			$('#output').append(typeof (obj)  +  '<br>');   // string {"num":28 ~~}
+			$('#output').append(typeof (obj2) +  '<br>');   // obj    {"num":28 ~~}
 			$('#output').append(obj4.name     +  '<br>'); 
 			// 형태를 기억할 것, json = "" 붙일 것 // jsonlint(문법 검사)
 			
