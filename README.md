@@ -1,5 +1,9 @@
 <h2>AJAX</h2>
-
+<li>Jquery 참조 사이트    : https://jquery.com/</li>
+<li>Spring Server 역할 (Mock Server) : https://jsonplaceholder.typicode.com/
+<li>Fake Data 활용 사이트 : https://reqres.in/</li>
+<li>$.ajax 참조 사이트    : https://www.tcpschool.com/ajax/ajax_jquery_ajax</li>
+<br>
 <details>
   <summary>
     04.22
@@ -40,10 +44,7 @@
   </summary>
   <ul dir="auto">
     <br>
-    <li>Jquery 참조 사이트    : https://jquery.com/</li>
-    <li>Spring Server 역할 (Mock Server) : https://jsonplaceholder.typicode.com/
-    <li>Fake Data 활용 사이트 : https://reqres.in/</li>
-    <li>$.ajax 참조 사이트    : https://www.tcpschool.com/ajax/ajax_jquery_ajax</li>
+  
     <br>
     
     const 상수 (원주율 같은 값이 바뀌지 않는)
